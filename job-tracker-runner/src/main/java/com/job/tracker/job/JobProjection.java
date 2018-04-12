@@ -30,13 +30,11 @@ public interface JobProjection {
 
     public String getState();
 
-    public String getPoNumber();
-
     public double getAmount();
 
     public Employee getAssignedTo();
 
-    public Employee getSalesRep();
+    public String getSalesRep();
 
     public Branch getSellingBranch();
 

@@ -146,7 +146,7 @@ public class V16__initial_schema extends TableCreationMigration {
 
     private Customer parseCustomerFromString(String customerCsvLine) {
         //Customer No,Name,Status,AddressLine1,AddressLine2,AddressLine3,City,State,Zip Code,Phone Number
-        //01-FCONCO , F CONNOLLY CO.,Active,1224 MONTGOMERY AVE,,,San Bruno,CA,94066,(650) 952-0542
+        //01-FCONCO , F CONNOLLY CO.,Active,Default Sales Rep, 1224 MONTGOMERY AVE,,,San Bruno,CA,94066,(650) 952-0542
 
         Customer customer = new Customer();
         String[] customerArray = null;

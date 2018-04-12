@@ -24,6 +24,5 @@ Ext.define('System.util.system.JobUtils', {
             var win = Ext.create(windowPath, {});
             win.show();
         }
-
     }
 });

@@ -61,8 +61,6 @@ public class V21__entity_number_expression_setup extends BaseDataMigration {
         EntityExpression projectNumberEntityExpression = createAndSaveProjectNumberEntityExpression();
         EntityExpression jobNumberEntityExpression = createAndSaveJobNumberEntityExpression();
         EntityExpression purchaseOrderNumberEntityExpression = createAndSavePurchaseOrderNumberEntityExpression();
-//        EntityExpression freeNumberEntityExpression = createAndSaveFreeNumberEntityExpression();
-//        EntityExpression funNumberEntityExpression = createAndSaveFunNumberEntityExpression();
         EntityExpression taskNumberEntityExpression = createAndSaveTaskNumberEntityExpression();
         EntityExpression taskRevisionNumberEntityExpression = createAndSaveTaskRevisionNumberEntityExpression();
 
@@ -70,8 +68,6 @@ public class V21__entity_number_expression_setup extends BaseDataMigration {
         createAndSaveProjectNumberEntityAssignment(afterCreateExpressionFieldSetterOperation, projectNumberEntityExpression);
         createAndSaveJobNumberEntityAssignment(afterCreateExpressionFieldSetterOperation, jobNumberEntityExpression);
         createAndSavePurchaseOrderNumberEntityAssignment(afterCreateExpressionFieldSetterOperation, purchaseOrderNumberEntityExpression);
-//        createAndSaveFreeNumberEntityAssignment(afterCreateExpressionFieldSetterOperation, freeNumberEntityExpression);
-//        createAndSaveFunNumberEntityAssignment(afterCreateExpressionFieldSetterOperation, funNumberEntityExpression);
         createAndSaveTaskNumberEntityAssignment(afterCreateExpressionFieldSetterOperation, taskNumberEntityExpression);
         createAndSaveTaskRevisionNumberEntityAssignment(afterCreateExpressionFieldSetterOperation, taskRevisionNumberEntityExpression);
     }
@@ -104,36 +100,12 @@ public class V21__entity_number_expression_setup extends BaseDataMigration {
         );
     }
 
-    public EntityExpression createAndSaveFreeNumberEntityExpression() {
-        return getEntityExpressionRepository().save(
-                EntityExpression.newInstance(
-                        "Free Number Generator",
-                        "An expression that is used to dynamically generate globally unique Free numbers upon new Free creations via imported customer identifiers.",
-                        "${free.job.freeChildren?size}",
-                        null,
-                        getEntityExpressionTypeRepository().findByName(EntityExpressionType.NUMBER_EXPRESSION_TYPE_NAME)
-                )
-        );
-    }
-
     public EntityExpression createAndSavePurchaseOrderNumberEntityExpression() {
         return getEntityExpressionRepository().save(
                 EntityExpression.newInstance(
                         "Purchase Order Number Generator",
-                        "An expression that is used to dynamically generate globally unique Free numbers upon new Free creations via imported customer identifiers.",
+                        "An expression that is used to dynamically generate globally unique Purchase Order numbers upon new Purchase Order creations via imported customer identifiers.",
                         "${(purchaseOrder.job.purchaseOrderCollection?size)?string[\"0000\"]}",
-                        null,
-                        getEntityExpressionTypeRepository().findByName(EntityExpressionType.NUMBER_EXPRESSION_TYPE_NAME)
-                )
-        );
-    }
-
-    public EntityExpression createAndSaveFunNumberEntityExpression() {
-        return getEntityExpressionRepository().save(
-                EntityExpression.newInstance(
-                        "Fun Number Generator",
-                        "An expression that is used to dynamically generate globally unique Fun numbers upon new Fun creations.",
-                        "${fun.free.children?size}",
                         null,
                         getEntityExpressionTypeRepository().findByName(EntityExpressionType.NUMBER_EXPRESSION_TYPE_NAME)
                 )
@@ -145,7 +117,7 @@ public class V21__entity_number_expression_setup extends BaseDataMigration {
                 EntityExpression.newInstance(
                         "Task Number Generator",
                         "An expression that is used to dynamically generate globally unique task numbers upon new task creations.",
-                        "${task.purchaseOrder.taskCollection?size}${purchaseOrder.purchaseOrderNumber}",
+                        "${purchaseOrder.purchaseOrderNumber}${task.purchaseOrder.taskCollection?size}",
                         null,
                         getEntityExpressionTypeRepository().findByName(EntityExpressionType.NUMBER_EXPRESSION_TYPE_NAME)
                 )
@@ -193,31 +165,9 @@ public class V21__entity_number_expression_setup extends BaseDataMigration {
     private void createAndSavePurchaseOrderNumberEntityAssignment(EntityExpressionOperation afterCreateExpressionFieldSetterOperation, EntityExpression numberEntityExpression) {
         createAndSaveFieldSetterCreationAssignment(
                 "Purchase Order Number Creator",
-                "Dynamically resolves the correct Free number and sets it on new Free creation.",
+                "Dynamically resolves the correct Purchase Order number and sets it on new Purchase Order creation.",
                 "PurchaseOrder",
                 "purchaseOrderNumber",
-                afterCreateExpressionFieldSetterOperation,
-                numberEntityExpression
-        );
-    }
-
-    private void createAndSaveFreeNumberEntityAssignment(EntityExpressionOperation afterCreateExpressionFieldSetterOperation, EntityExpression numberEntityExpression) {
-        createAndSaveFieldSetterCreationAssignment(
-                "Free Number Creator",
-                "Dynamically resolves the correct Free number and sets it on new Free creation.",
-                "Free",
-                "freeNumber",
-                afterCreateExpressionFieldSetterOperation,
-                numberEntityExpression
-        );
-    }
-
-    private void createAndSaveFunNumberEntityAssignment(EntityExpressionOperation afterCreateExpressionFieldSetterOperation, EntityExpression numberEntityExpression) {
-        createAndSaveFieldSetterCreationAssignment(
-                "Fun Number Creator",
-                "Dynamically resolves the correct fun number and sets it on new fun creation.",
-                "Fun",
-                "funNumber",
                 afterCreateExpressionFieldSetterOperation,
                 numberEntityExpression
         );

@@ -238,10 +238,10 @@ public class V19__configure_ui_defaults extends BaseDataMigration {
                 update("jobNumber", "Job Number", "{xtype: 'system-field-text',hideIfNull:true}"),
                 update("folderLocation", "Folder Location", "{xtype: 'system-field-text',hideIfNull:true}", "{hidden:true}"),
                 update("name", "Name", "{hidden:true}"),
-                update("project", "Project", "{maskIfInitialValueExists: true,allowBlank:false}"),
-                update("customer", "Customer", "{maskIfInitialValueExists: true,allowBlank:false}"),
+                update("project", "Project", "{maskIfInitialValueExists: true, allowBlank:false}"),
+                update("customer", "Customer", "{maskIfInitialValueExists: true, allowBlank:false}"),
                 update("amount", "Amount", "{xtype: 'system-field-currency'}", "{xtype: 'numbercolumn', renderer: Ext.util.Format.usMoney, filter: {type: 'number',hideTrigger: true,keyNavEnabled: false,mouseWheelEnabled: false}}"),
-                update("salesRep", "Sales Rep", "{maskIfInitialValueExists: true}"),
+                update("salesRep", "Sales Rep"),
                 update("projectManager", "Project Manager"),
                 update("date", "Date"),
                 update("description", "Description", "{hidden:true}")
@@ -250,9 +250,8 @@ public class V19__configure_ui_defaults extends BaseDataMigration {
         updateEntityUi(PurchaseOrder.class,
                 update("purchaseOrderNumber", "Purchase Order Number", "{xtype: 'system-field-text',hideIfNull:true}", "{hidden:true}"),
                 update("folderLocation", "Folder Location", "{xtype: 'system-field-text',hidden:true}", "{hidden:true}"),
-                update("purchaseOrderHash", "Purchase Order Hash", "{hidden:true}", "{hidden:true}"),
                 update("name", "PO #", "{allowBlank:false}"),
-                update("job", "Job", "{maskIfInitialValueExists: true,allowBlank:false}"),
+                update("job", "Job", "{maskIfInitialValueExists: true, allowBlank:false}"),
                 update("description", "Description", "{hidden:true}", "{hidden:true}")
         );
 

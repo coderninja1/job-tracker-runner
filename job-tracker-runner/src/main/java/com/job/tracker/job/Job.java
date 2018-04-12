@@ -135,12 +135,14 @@ public class Job extends NamedEntity<Integer> {
     }
 
     public String getSalesRep() {
-        salesRep = customer.getSalesRep();
         return salesRep;
     }
 
     public void setSalesRep(String salesRep) {
         this.salesRep = salesRep;
+        if(this.getCustomer()!=null && this.getCustomer().getSalesRep()!= null){
+            this.salesRep = this.getCustomer().getSalesRep();
+        }
     }
 
     public LocalDate getDate() {

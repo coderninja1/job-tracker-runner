@@ -1,6 +1,8 @@
 package com.job.tracker.job.tree;
 
 import com.job.tracker.job.Job;
+import com.job.tracker.purchaseOrder.PurchaseOrder;
+import com.job.tracker.purchaseOrder.PurchaseOrderRepository;
 import com.job.tracker.task.Task;
 import com.job.tracker.task.TaskRepository;
 import com.system.db.repository.base.entity.SystemRepository;
@@ -37,6 +39,9 @@ public class JobTreeController {
     private SystemRepository<Job, Integer> jobRepository;
 
     @Autowired
+    private PurchaseOrderRepository purchaseOrderRepository;
+
+    @Autowired
     private TaskRepository taskRepository;
 
     ///////////////////////////////////////////////////////////////////////
@@ -49,6 +54,12 @@ public class JobTreeController {
 
         if (searchDepth == null || searchDepth != -1) {
             Set<Job> jobSet = new HashSet<>(jobRepository.findAll(filter, searchDepth, extraSearchParams, Pageable.unpaged()).getContent());
+
+            Set<PurchaseOrder> purchaseOrderSet = new HashSet<>(purchaseOrderRepository.findAll(null, searchDepth, extraSearchParams, Pageable.unpaged()).getContent());
+            for(PurchaseOrder purchaseOrder: purchaseOrderSet){
+                System.out.println("Empty Purchase Order = " + purchaseOrder.getName());
+            }
+
             Set<Task> taskSet = new HashSet<>(taskRepository.findAll(filter, searchDepth, extraSearchParams, Pageable.unpaged()).getContent());
 
             result.setChildren(getTaskToJobList(taskSet, jobSet, filter));
@@ -104,6 +115,14 @@ public class JobTreeController {
 
     public void setJobRepository(SystemRepository<Job, Integer> jobRepository) {
         this.jobRepository = jobRepository;
+    }
+
+    public PurchaseOrderRepository getPurchaseOrderRepository() {
+        return purchaseOrderRepository;
+    }
+
+    public void setPurchaseOrderRepository(PurchaseOrderRepository purchaseOrderRepository) {
+        this.purchaseOrderRepository = purchaseOrderRepository;
     }
 
     public TaskRepository getTaskRepository() {

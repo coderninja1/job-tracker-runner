@@ -103,7 +103,7 @@ public class V22__entity_folder_expression_setup extends BaseDataMigration {
         return createAndSaveEntityExpression(
                 "Task Base Folder Path",
                 "Defines the base folder path for a task given it's associated information.",
-                "${task.purchaseOrder.folderLocation}${task.taskType.folderName}/${task.taskNumber} - ${task.job.customer.name?replace(\"[^a-zA-Z0-9\\\\.\\\\-]\", \"_\", \"r\")} - ${task.name}" + File.separator,
+                "${task.purchaseOrder.folderLocation}${task.taskType.folderName}/${task.taskNumber} - ${task.name}" + File.separator,
                 null
         );
     }
@@ -320,7 +320,7 @@ public class V22__entity_folder_expression_setup extends BaseDataMigration {
     //////////////////////////////////////////////////////////////////////
 
     /**
-     * Need to create all the nested folders under the job base folder path
+     * Need to create all the nested folders under the Purchase Order base folder path
      */
     private void createRemainingTaskRevisionSubfolderStructure(EntityExpression revisionSubFolderPathEntityExpression) {
         createAndSaveEntityExpression(
@@ -376,7 +376,7 @@ public class V22__entity_folder_expression_setup extends BaseDataMigration {
 
     private void createRemainingPurchaseOrderCustomerFolderStructure(EntityExpression baseJobCustomerFolderPathEntityExpression, EntityExpressionOperation createFolderOperation) {
 
-        //Create the folder 1-LEGENDS when a new job is created, if the folder doesn't already exist
+        //Create the folder 1-LEGENDS when a new Purchase Order is created, if the folder doesn't already exist
         createFolderStructureWithAssignment(
                 "PurchaseOrder",
                 "1-",
@@ -385,7 +385,7 @@ public class V22__entity_folder_expression_setup extends BaseDataMigration {
                 createFolderOperation
         );
 
-        //Create the folder 2-CAD when a new job is created, if the folder doesn't already exist
+        //Create the folder 2-CAD when a new Purchase Order is created, if the folder doesn't already exist
         createFolderStructureWithAssignment(
                 "PurchaseOrder",
                 "2-",
@@ -394,7 +394,7 @@ public class V22__entity_folder_expression_setup extends BaseDataMigration {
                 createFolderOperation
         );
 
-        //Create the folder 3-SUBMITTALS when a new job is created, if the folder doesn't already exist
+        //Create the folder 3-SUBMITTALS when a new Purchase Order is created, if the folder doesn't already exist
         createFolderStructureWithAssignment(
                 "PurchaseOrder",
                 "3-",
@@ -403,7 +403,7 @@ public class V22__entity_folder_expression_setup extends BaseDataMigration {
                 createFolderOperation
         );
 
-        //Create the folder 4-RECEIVED when a new job is created, if the folder doesn't already exist
+        //Create the folder 4-RECEIVED when a new Purchase Order is created, if the folder doesn't already exist
         createFolderStructureWithAssignment(
                 "PurchaseOrder",
                 "4-",
@@ -412,7 +412,7 @@ public class V22__entity_folder_expression_setup extends BaseDataMigration {
                 createFolderOperation
         );
 
-        //Create the folder 5-CUSTOM ENGINEERING when a new job is created, if the folder doesn't already exist
+        //Create the folder 5-CUSTOM ENGINEERING when a new Purchase Order is created, if the folder doesn't already exist
         createFolderStructureWithAssignment(
                 "PurchaseOrder",
                 "5-",
@@ -421,11 +421,20 @@ public class V22__entity_folder_expression_setup extends BaseDataMigration {
                 createFolderOperation
         );
 
-        //Create the folder 6-CORRESPONDENCE when a new job is created, if the folder doesn't already exist
+        //Create the folder 6-CORRESPONDENCE when a new Purchase Order is created, if the folder doesn't already exist
         createFolderStructureWithAssignment(
                 "PurchaseOrder",
                 "6-",
                 "CORRESPONDENCE",
+                baseJobCustomerFolderPathEntityExpression,
+                createFolderOperation
+        );
+
+        //Create the folder 7-POs when a new Purchase Order is created, if the folder doesn't already exist
+        createFolderStructureWithAssignment(
+                "PurchaseOrder",
+                "7-",
+                "POs",
                 baseJobCustomerFolderPathEntityExpression,
                 createFolderOperation
         );

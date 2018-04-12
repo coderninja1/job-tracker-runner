@@ -9,7 +9,7 @@ public interface PurchaseOrderRepository extends NamedEntityRepository<PurchaseO
     /**
      * Return all tasks for a given job id
      *
-     * @param purchaseOrderId
+     * @param jobId
      * @return - list of tasks filtered by job id
      */
     public List<PurchaseOrder> findByJobId(Integer jobId);

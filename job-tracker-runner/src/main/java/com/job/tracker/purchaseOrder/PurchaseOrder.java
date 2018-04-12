@@ -17,18 +17,12 @@ import static javax.persistence.FetchType.EAGER;
 @Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"name", "job_id"})})
 public class PurchaseOrder extends NamedEntity<Integer> {
 
-    //@Column(unique = true)
     private String purchaseOrderNumber;
-    private String purchaseOrderHash;
 
-    @ManyToOne
+    @ManyToOne(fetch = EAGER)
     @JoinColumn(name = "job_id", referencedColumnName = "id")
     private Job job;
 
-
-//    @ManyToOne
-//    @JoinColumn(name = "project_id", nullable = false)
-//    private Project project;
 
     /**
      * The absolute path of the folder structure created for
@@ -65,14 +59,6 @@ public class PurchaseOrder extends NamedEntity<Integer> {
     ///////////////////////////////////////////////////////////////////////
     ////////                                             Basic   Getter/Setters                                          //////////
     //////////////////////////////////////////////////////////////////////
-
-    public String getPurchaseOrderHash() {
-        return purchaseOrderHash;
-    }
-
-    public void setPurchaseOrderHash(String purchaseOrderHash) {
-        this.purchaseOrderHash = purchaseOrderHash;
-    }
 
     public String getPurchaseOrderNumber() {
         return purchaseOrderNumber;

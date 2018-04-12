@@ -40,6 +40,8 @@ public class TreeJobDTO {
 
     private String projectName;
 
+    private String salesRep;
+
     private List<TreeTaskDTO> children;
 
     ///////////////////////////////////////////////////////////////////////
@@ -61,7 +63,7 @@ public class TreeJobDTO {
         treeJobDTO.setBusinessClientName(job.getCustomer().getName());
         treeJobDTO.setFileFolderPath(job.getFolderLocation());
         treeJobDTO.setExpanded(expanded);
-
+        treeJobDTO.setSalesRep(job.getCustomer().getSalesRep());
         return treeJobDTO;
     }
 
@@ -181,5 +183,14 @@ public class TreeJobDTO {
 
         childrenList.add(treeTaskDTO);
     }
+
+    public String getSalesRep() {
+        return salesRep;
+    }
+
+    public void setSalesRep(String salesRep) {
+        this.salesRep = salesRep;
+    }
+
 
 }
